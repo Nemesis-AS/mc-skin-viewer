@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Minecraft Skin Viewer</title>
+
+        <script
+            type="module"
+            src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"
+        ></script>
+
+        <link rel="stylesheet" href="./index.css" />
+        <script src="./index.js" defer></script>
+    </head>
+    <body>
+        <model-viewer id="viewer" alt="Minecraft Character" src="./MCCharacterJoined.glb" shadow-intensity="1" camera-controls touch-action="pan-y">
+            <form id="usernameForm">
+                <label>
+                    <span>Enter username:</span>
+                    <input
+                        type="text"
+                        name="username"
+                        id="usernameInput"
+                        autocomplete="off"
+                        required
+                    />
+                </label>
+                <button type="submit">Submit</button>
+            </form>
+        </model-viewer>
+    </body>
+</html>
