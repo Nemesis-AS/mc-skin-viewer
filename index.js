@@ -10,6 +10,7 @@ function main() {
 
 async function fetchSkin(username) {
     try {
+        showLoader();
         const res = await fetch("https://api.ashcon.app/mojang/v2/user/" + username);
         if(res.status != 200) {
             throw new Error("An error occurred while fetching skin!");
@@ -23,10 +24,11 @@ async function fetchSkin(username) {
         }
         changeTexture(skinUrl);
     } catch(err) {
-        // @todo! Show some UI indicating the error
+        alert("An error occurred while fetching skin!");
         console.error(err);
+    } finally {
+        hideLoader();
     }
-    
 }
 
 async function changeTexture(textureUrl) {
@@ -39,7 +41,7 @@ async function changeTexture(textureUrl) {
     
     let character;
     scene.traverse((obj) => {
-        if (obj.isMesh && obj.name === "Character")
+        if (obj.isMesh && obj.name === "Head") // @todo! Find a better way to get the character
             character = obj;
     });
 
@@ -47,6 +49,14 @@ async function changeTexture(textureUrl) {
     texture.minFilter = 1003; // THREE.NearestFilter
     texture.magFilter = 1003; // THREE.NearestFilter
 
+}
+
+function showLoader() {
+    document.getElementById("loaderOverlay").classList.remove("hidden");
+}
+
+function hideLoader() {
+    document.getElementById("loaderOverlay").classList.add("hidden");
 }
 
 window.onload = main;
